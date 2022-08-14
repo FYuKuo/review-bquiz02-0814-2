@@ -1,6 +1,38 @@
 <fieldset class="p-20 aut">
     <legend>帳號管理</legend>
 
+    <table class="w-70 aut ct">
+    <tr class="clo">
+        <td>帳號</td>
+        <td>密碼</td>
+        <td>刪除</td>
+    </tr>
+    <?php
+    $rows = $Admin->all();
+    foreach ($rows as $key => $row) {
+        if($row['acc'] != 'admin'){
+    ?>
+        <tr>
+            <td><input type="text" name="acc[]" value="<?=$row['acc']?>"></td>
+
+            <td><input type="password" name="pw[]" value="<?=$row['pw']?>"></td>
+
+            <td>
+                <input type="checkbox" name="del[]" value="<?=$row['id']?>">
+            </td>
+        </tr>
+    <?php
+        }
+    }
+    ?>
+    <tr>
+        <td colspan="3">
+            <input type="button" value="確定刪除" onclick="del()">
+            <input type="button" value="清空選取" onclick="resetDel()">
+        </td>
+    </tr>
+    </table>
+
 
     <h2>新增會員</h2>
 
@@ -75,5 +107,23 @@
             }
         }
 
+    }
+
+    function del(){
+
+        let del = new Array();
+
+        $('input[type=checkbox]:checked').each((key,val)=>{
+            del.push($(val).val());
+        })
+
+        $.post('./api/del_user.php',{del},()=>{
+            location.reload();
+        })
+    }
+
+    function resetDel(){
+
+        $('input[type=checkbox]:checked').prop('checked',false);
     }
 </script>
