@@ -367,3 +367,25 @@ cursor:default;
 	cursor: pointer;
 	margin: 15px 0;
 }
+
+.likeBtn {
+	cursor: pointer;
+	color: blue;
+
+}
+.myHover{
+	position: relative;
+}
+
+#alerr{
+	background:rgba(51,51,51,0.8); 
+	color:#FFF; 
+	min-height:100px;
+	height: 300px; 
+	width:500px; 
+	position:absolute; 
+	display:none; 
+	z-index:9999; 
+	overflow:auto;
+	right: -400px;
+}
