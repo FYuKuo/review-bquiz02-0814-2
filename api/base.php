@@ -152,4 +152,20 @@ $Veiw = new DB('veiw');
 $News = new DB('news');
 $Que = new DB('que');
 $Log = new DB('log');
+
+if(!isset($_SESSION['veiw'])){
+    $veiw = $Veiw->find(['date'=>date('Y-m-d')]);
+
+    if(!empty($veiw)){
+
+        $veiw['total']++;
+        $Veiw->save($veiw);
+    }else{
+
+
+        $Veiw->save(['date'=>date('Y-m-d'),'total'=>1]);
+    }
+
+    $_SESSION['veiw'] = 1;
+}
 ?>
